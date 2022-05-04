@@ -2,8 +2,11 @@
 // Created by federico on 27/04/22.
 //
 
-#ifndef TASK1_ROSTASK1NODE_H
-#define TASK1_ROSTASK1NODE_H
+#ifndef TASK1_ROSNODETASK1_H
+#define TASK1_ROSNODETASK1_H
+#include <std_srvs/Trigger.h>
+#include <ros/ros.h>
+#include "sensor_msgs/JointState.h"
 
 /**
  * RosTask1Node class handles the binding between ros and our custom algorithms, it gives the possibility to subscribe,
@@ -11,19 +14,19 @@
  *
  * @author Federico Sarrocco
  */
-class RosTask1Node {
+class RosNodeTask1 {
 
 public:
     /*!
    * Constructor.
    * @param nodeHandle the ROS node handle.
    */
-    RosTask1Node(ros::NodeHandle& nodeHandle);
+    RosNodeTask1(ros::NodeHandle& nodeHandle);
 
     /*!
    * Destructor.
    */
-    virtual ~RosPackageTemplate();
+    virtual ~RosNodeTask1();
 
 private:
     /*!
@@ -33,10 +36,10 @@ private:
     bool readParameters();
 
     /*!
-     * ROS topic callback method.
+     * ROS topic callback method. It receives wheel message
      * @param message the received message.
      */
-    void topicCallback(const sensor_msgs::Temperature& message);
+    void wheelCallback(const sensor_msgs::JointState& message);
 
     /*!
      * ROS service server callback.
@@ -54,7 +57,7 @@ private:
     ros::Subscriber subscriber_;
 
     //! ROS topic name to subscribe to.
-    std::string subscriberTopic_;
+    std::string subscriberTopicWheel_;
 
     //! ROS service server.
     ros::ServiceServer serviceServer_;
@@ -79,4 +82,4 @@ private:
 };
 
 
-#endif //TASK1_ROSTASK1NODE_H
+#endif //TASK1_ROSNODETASK1_H

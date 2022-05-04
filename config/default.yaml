@@ -1,0 +1,14 @@
+ros:
+  subscriber_topic_wheel: "/wheel_states"
+  publisher_topic_A: "aaaaa"
+
+robot:
+  params:
+    h: 10
+    l: 10
+    w: 11
+
+  initial_pose:
+    x: 0.0
+    y: 0.0
+    theta: 0.0
