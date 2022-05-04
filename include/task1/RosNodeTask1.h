@@ -26,7 +26,7 @@ public:
     /*!
    * Destructor.
    */
-    virtual ~RosNodeTask1();
+    virtual ~RosNodeTask1()= default;;
 
 private:
     /*!

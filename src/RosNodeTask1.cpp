@@ -24,3 +24,4 @@ bool RosNodeTask1::readParameters() {
 
     return hasFailed;
 }
+
