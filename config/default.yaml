@@ -1,15 +1,16 @@
 ros:
   subscriber_topic_wheel: "/wheel_states"
-  publisher_topic_A: "aaaaa"
+  publisher_cmd_vel: "/cmd_vel"
+  publisher_odom: "/odom"
 
 # TODO le velocita delle bag sono in rad/min
 robot:
   params:
-    r: 10
-    l: 10
-    w: 11
-    CPR: 88 #encoder
-    gearRation: 5
+    r: 0.07
+    l: 0.2
+    w: 0.169
+    CPR: 42 # encoder counts per revolution
+    gearRatio: 5
 
   initial_pose:
     x: 0.0

@@ -8,9 +8,9 @@ project(task1)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  std_msgs
-)
+        roscpp
+        std_msgs
+        )
 
 ## System dependencies are found with CMake's conventions
 find_package(Eigen3 REQUIRED)   ## TODO chiedere
@@ -103,12 +103,12 @@ find_package(Eigen3 REQUIRED)   ## TODO chiedere
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-   INCLUDE_DIRS
+        INCLUDE_DIRS
         include
         ${EIGEN3_INCLUDE_DIR}
-#  LIBRARIES task1
-#  CATKIN_DEPENDS roscpp std_msgs
-#  DEPENDS system_lib
+        #  LIBRARIES task1
+        #  CATKIN_DEPENDS roscpp std_msgs
+        #  DEPENDS system_lib
 )
 
 ###########
@@ -118,8 +118,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-  include
-  ${catkin_INCLUDE_DIRS}
+        include
+        ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -135,8 +135,9 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(${PROJECT_NAME}_node src/main.cpp src/RosNodeTask1.cpp src/motionModel/MotionModel.cpp
-                                    src/odometry/MecanumOdometry.cpp src/odometry/OdometryHelper.cpp)
+add_executable(${PROJECT_NAME}_node src/main.cpp src/RosNodeTask1.cpp src/kinematic/MecanumKinematic.cpp
+        src/kinematic/WheelEncoderHelper.cpp src/filtering/LowPassFilter.cpp src/odometry/Odometry.cpp
+        src/odometry/Euler.cpp src/odometry/RungeKutta4.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -150,8 +151,8 @@ add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catk
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(${PROJECT_NAME}_node
-   ${catkin_LIBRARIES}
-)
+        ${catkin_LIBRARIES}
+        )
 
 #############
 ## Install ##
