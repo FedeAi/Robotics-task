@@ -15,7 +15,7 @@ public:
 
     Odometry();
 
-    explicit Odometry(std::unique_ptr<Integrator> integrationMethod);
+    Odometry(std::unique_ptr<Integrator> integrationMethod, double theta0, double x0, double y0);
 
     void updatePosition(const Control &control);
 
@@ -25,12 +25,11 @@ public:
     const Pose &getPose() const;
 
     void resetPose(Pose pose);
+    void setIntegrationMethod(std::unique_ptr<Integrator> integrationMethod);
 
 private:
     Pose actualPose_;
 
-
-private:
     std::unique_ptr<Integrator> integrationMethod_;
     double previousTime_;
 };

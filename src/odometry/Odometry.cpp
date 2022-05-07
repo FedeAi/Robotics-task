@@ -9,6 +9,7 @@
 
 void Odometry::updatePosition(const Control &control, double timestamp) {
     double deltaTime = timestamp - previousTime_;
+    //std::cout << deltaTime << std::endl;
     previousTime_ = timestamp;
     if (deltaTime > .1) {
         return; // unfeasible time
@@ -22,12 +23,12 @@ void Odometry::updatePosition(const Control &control) {
     updatePosition(control, now);
 }
 
-Odometry::Odometry(std::unique_ptr<Integrator> integrationMethod) : actualPose_(Pose({0, 0}, 0)) {
+Odometry::Odometry(std::unique_ptr<Integrator> integrationMethod, double theta0, double x0, double y0) : actualPose_(Pose({x0, y0}, theta0)) {
     previousTime_ = 0.0;
     integrationMethod_ = std::move(integrationMethod);
 }
 
-Odometry::Odometry() : actualPose_(Pose({0, 0}, 0)) {
+Odometry::Odometry() : actualPose_(Pose({0.0, 0.0}, 0.0)) {
     previousTime_ = 0.0;
     integrationMethod_ = std::make_unique<Euler>(Euler());
 }
@@ -39,6 +40,10 @@ const Pose &Odometry::getPose() const {
 
 void Odometry::resetPose(Pose pose) {
     actualPose_ = pose;
+}
+
+void Odometry::setIntegrationMethod(std::unique_ptr<Integrator> integrationMethod) {
+    integrationMethod_ = std::move(integrationMethod);
 }
 
 

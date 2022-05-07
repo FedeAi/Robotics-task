@@ -56,6 +56,8 @@ public:
 
     void computeWheelSpeed(double encoderValue, double timestamp);
 
+    void setFilter(std::unique_ptr<Filter> filter);
+
     double getAngularSpeed() const;
 
 private:

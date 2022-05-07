@@ -23,6 +23,10 @@ double WheelSpeedCalculator::getAngularSpeed() const {
     return wheelAngularSpeed_;
 }
 
+void WheelSpeedCalculator::setFilter(std::unique_ptr<Filter> filter) {
+    filter_ = std::move(filter);
+}
+
 
 void EncoderDelta::updateEncoder(double encoderValue, double timestamp) {
 

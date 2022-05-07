@@ -10,6 +10,13 @@ project(task1)
 find_package(catkin REQUIRED COMPONENTS
         roscpp
         std_msgs
+        sensor_msgs
+        geometry_msgs
+        dynamic_reconfigure
+        message_generation
+        message_runtime
+        tf2
+        tf2_ros
         )
 
 ## System dependencies are found with CMake's conventions
@@ -47,18 +54,18 @@ find_package(Eigen3 REQUIRED)   ## TODO chiedere
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
+add_message_files(
+   FILES
+   WheelsSpeed.msg
 #   Message2.msg
-# )
+)
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
+ add_service_files(
+   FILES
+   SetPoseService.srv
 #   Service2.srv
-# )
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,10 +75,10 @@ find_package(Eigen3 REQUIRED)   ## TODO chiedere
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -88,10 +95,10 @@ find_package(Eigen3 REQUIRED)   ## TODO chiedere
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
+ generate_dynamic_reconfigure_options(
+   cfg/task1.cfg
 #   cfg/DynReconf2.cfg
-# )
+ )
 
 ###################################
 ## catkin specific configuration ##

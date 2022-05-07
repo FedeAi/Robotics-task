@@ -5,11 +5,10 @@
 #include "task1/RosNodeTask1.h"
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "ros_package_template");
+    ros::init(argc, argv, "task1");
     ros::NodeHandle nodeHandle("~");
 
     RosNodeTask1 rosPackageTemplate(nodeHandle);
-
     ros::spin();
     return 0;
 }

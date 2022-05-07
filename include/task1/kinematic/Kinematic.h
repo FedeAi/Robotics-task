@@ -14,17 +14,24 @@
  */
 class Kinematic {
     /**
-     * getter
-     * @return last computed linear speed
+     * getLinearSpeed available after having called computeKinematic
+     * @see computeKinematic
+     * @return linear robot speed [vx,vy]
      */
     virtual Eigen::Vector2d getLinearSpeed() {};
 
     /**
-     * getter
-     * @return last computed angular speed
+     * getAngularSpeed available after having called computeKinematic
+     * @see computeKinematic
+     * @return angular robot speed [w]
      */
     virtual double getAngularSpeed() {};
 
+    /**
+     * getControl available after having called computeKinematic
+     * @see computeKinematic
+     * @return both linear speed and angular speed
+     */
     virtual Control getControl() {}
 };
 

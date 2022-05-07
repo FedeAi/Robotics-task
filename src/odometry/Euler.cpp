@@ -10,6 +10,7 @@ Pose Euler::updatePose(Pose startingPose, Control control, double deltaTime) {
             sin(startingPose.getTheta()), cos(startingPose.getTheta());
 
     double theta = startingPose.getTheta() + control.getAngularSpeed() * deltaTime;
+    theta =  atan2(sin(theta),cos(theta)); // pi2pi function
     Eigen::Vector2d position = startingPose.getPosition() + deltaTime * motion * control.getLinearSpeed();
     return {position, theta};
 }

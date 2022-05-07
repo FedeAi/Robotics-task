@@ -26,7 +26,7 @@ Pose Rungekutta4::updatePose(Pose startingPose, Control control, double deltaTim
     auto position = startingPose.getPosition() + (k1_p + 2 * k2_p + 2 * k3_p + k4_p) / 6.0;
     double theta =
             startingPose.getTheta() + (k1_r + 2 * k2_r + 2 * k3_r + k4_r) / 6.0; // rk4 is useless for theta (exact)
-
+    theta =  atan2(sin(theta),cos(theta)); // pi2pi function
     return {position, theta};
 }
 

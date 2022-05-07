@@ -1,7 +1,13 @@
 ros:
   subscriber_topic_wheel: "/wheel_states"
   publisher_cmd_vel: "/cmd_vel"
+  publisher_wheels_vel: "/wheels_rpm"
   publisher_odom: "/odom"
+
+  robot_frame_id: "base_link"
+  odom_frame_id: "odom"
+  global_frame_id: "world"
+
 
 # TODO le velocita delle bag sono in rad/min
 robot:
@@ -12,7 +18,26 @@ robot:
     CPR: 42 # encoder counts per revolution
     gearRatio: 5
 
-  initial_pose:
-    x: 0.0
-    y: 0.0
-    theta: 0.0
+  starting_odom: {0.000664, 0.02518, 0.004701} # {theta, x0, y0}
+  # BAG1  0.003546233754605055,-0.012264326214790344, 0.008607577532529831
+  # BAG2  0.0006646061665378511, 0.02518487349152565, 0.004701722413301468
+
+
+
+# calibs
+  #only distance
+    # BAG1
+        #1: Trial 98 finished with value: 220.9810077079253 and parameters: {'w': 0.16744636453720238, 'l': 0.19438799867063777, 'r': 0.07473947383983283, 'CPR': 41}. Best is trial 98 with value: 220.9810077079253.
+
+    # BAG2    BASE LINE ERROR: %f 4586.1305492403935
+        #1 Trial 113 finished with value: 605.4685435410694 and parameters: {'w': 0.16609257290901028, 'l': 0.1909074038710473, 'r': 0.07205842518370711, 'CPR': 40}. Best is trial 113 with value: 605.4685435410694.
+#                   w = trial.suggest_float('w', 0.160, 0.178)
+#                   l = trial.suggest_float('l', 0.19, 0.21)
+#                   r = trial.suggest_float('r', 0.065, 0.075)
+#                   CPR = trial.suggest_int("CPR", 40, 44, step=1)
+
+  # distance angle
+
+  # BAG2 BASE LINE ERROR: %f 2.8958808644747718
+      #1 [I 2022-05-07 20:28:22,191] Trial 90 finished with value: 1.9194858522983878 and parameters: {'w': 0.1621234061413258, 'l': 0.20327909544603728, 'r': 0.07221023879945607, 'CPR': 40}. Best is trial 90 with value: 1.9194858522983878.
+        # BASE LINE ERROR: DISTANCE COMULATIVE 160.0662030749603
