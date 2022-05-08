@@ -108,9 +108,9 @@ The calibration is performed in python (easier to use for optimization tasks ins
 I noticed a lot of noise in the encoder reading, so I tried to filter it out. As, usually, for control algorithms is better to use noise free feedback variables.
 I implemented a simple discrete low pass filter:
 
-![G(s)](./images/G(S)_lowPass.svg)
+>![G(s)](./images/G(S)_lowPass.svg)
 
-![G(s)_params](./images/G(S)_params.svg)
+>![G(s)_params](./images/G(S)_params.svg)
 
 I performed some comparison tests, I found no improvment on the overall odometry computation, but **an huge reduction 
 in noise in (w,v) and (wheel speeds) variables.**
