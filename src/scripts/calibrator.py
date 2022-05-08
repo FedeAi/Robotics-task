@@ -37,10 +37,14 @@ def objective(trial):
 
 
 if __name__ == '__main__':
-    bag = pd.read_csv("bags/bag2.csv")
+    bag = pd.read_csv("bags/bag1.csv")
     startingPose = bag[["theta", "x", "y"]].iloc[0].values
 
-    baseLineError = computeRobotError(0.168, 0.195, 0.0725, 40)
+    baseLineError = computeRobotError(0.169, 0.2, 0.070, 42)
+    baseLineError = computeRobotError(0.166092, 0.190907, 0.072058, 40)    #'w': 0.16609257290901028, 'l': 0.1909074038710473, 'r': 0.07205842518370711
+    #baseLineError = computeRobotError(0.162123, 0.20327, 0.07221, 40)    #'w': 0.1621234061413258, 'l': 0.20327909544603728, 'r': 0.07221023879945607,
+    # baseLineError = computeRobotError(0.161204, 0.200937, 0.0724105, 40)    #'w': 0.1621234061413258, 'l': 0.20327909544603728, 'r': 0.07221023879945607,
+    #baseLineError = computeRobotError(0.160837, 0.192735, 0.074984, 40)    #'w': 0.1621234061413258, 'l': 0.20327909544603728, 'r': 0.07221023879945607,
     print("BASE LINE ERROR: %f", baseLineError)
     study = optuna.create_study()
     study.optimize(objective, n_trials=200, n_jobs=8)

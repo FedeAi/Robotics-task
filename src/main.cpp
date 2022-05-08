@@ -5,7 +5,7 @@
 #include "task1/RosNodeTask1.h"
 
 int main(int argc, char **argv) {
-    ros::init(argc, argv, "task1");
+    ros::init(argc, argv, "task1_node");
     ros::NodeHandle nodeHandle("~");
 
     RosNodeTask1 rosPackageTemplate(nodeHandle);

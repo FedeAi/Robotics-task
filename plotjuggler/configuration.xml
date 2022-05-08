@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root version="2.3.8">
+ <tabbed_widget name="Main Window" parent="main_window">
+  <Tab containers="1" tab_name="tab1">
+   <Container>
+    <DockSplitter orientation="-" sizes="1" count="1">
+     <DockSplitter orientation="|" sizes="0.500319;0.499681" count="2">
+      <DockSplitter orientation="-" sizes="0.5;0.5" count="2">
+       <DockArea name="x position">
+        <plot mode="TimeSeries" style="Lines">
+         <range bottom="0.016075" right="6.499312" top="0.298019" left="1.500560"/>
+         <limitY/>
+         <curve name="/odom/pose/position/x" color="#1f77b4"/>
+         <curve name="/robot/pose/position/x" color="#f14cc1"/>
+        </plot>
+       </DockArea>
+       <DockArea name="yaw">
+        <plot mode="TimeSeries" style="Lines">
+         <range bottom="-59.968614" right="6.499312" top="2.651462" left="1.500560"/>
+         <limitY/>
+         <curve name="/odom/pose/orientation/yaw_deg" color="#1ac938"/>
+         <curve name="/robot/pose/orientation/yaw_deg" color="#ff7f0e"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+      <DockSplitter orientation="-" sizes="0.5;0.5" count="2">
+       <DockArea name="y position">
+        <plot mode="TimeSeries" style="Lines">
+         <range bottom="-0.369506" right="6.499312" top="0.017687" left="1.500560"/>
+         <limitY/>
+         <curve name="/odom/pose/position/y" color="#d62728"/>
+         <curve name="/robot/pose/position/y" color="#9467bd"/>
+        </plot>
+       </DockArea>
+       <DockArea name="wheels speed">
+        <plot mode="TimeSeries" style="Lines">
+         <range bottom="-1029.825000" right="6.493867" top="1146.825000" left="1.512202"/>
+         <limitY/>
+         <curve name="/wheels_rpm/rpm_fl" color="#17becf"/>
+         <curve name="/wheel_states/front_left/velocity" color="#bcbd22"/>
+         <curve name="/wheel_states/front_right/velocity" color="#1f77b4"/>
+         <curve name="/wheels_rpm/rpm_fr" color="#d62728"/>
+         <curve name="/wheel_states/rear_left/velocity" color="#1ac938"/>
+         <curve name="/wheels_rpm/rpm_rl" color="#ff7f0e"/>
+         <curve name="/wheel_states/rear_right/velocity" color="#f14cc1"/>
+         <curve name="/wheels_rpm/rpm_rr" color="#9467bd"/>
+        </plot>
+       </DockArea>
+      </DockSplitter>
+     </DockSplitter>
+    </DockSplitter>
+   </Container>
+  </Tab>
+  <currentTabIndex index="0"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="1"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <default time_axis=""/>
+  </plugin>
+  <plugin ID="DataLoad ROS bags">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="LSL Subscriber"/>
+  <plugin ID="MQTT Subscriber"/>
+  <plugin ID="ROS Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin ID="UDP Server"/>
+  <plugin ID="WebSocket Server"/>
+  <plugin ID="ZMQ Subscriber"/>
+  <plugin ID="ROS /rosout Visualization" status="idle"/>
+  <plugin ID="ROS Topic Re-Publisher" status="idle"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <previouslyLoaded_Datafiles/>
+ <previouslyLoaded_Streamer name="ROS Topic Subscriber"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <customMathEquations/>
+ <snippets/>
+ <!-- - - - - - - - - - - - - - - -->
+</root>
+

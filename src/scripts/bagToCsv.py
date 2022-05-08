@@ -6,7 +6,7 @@ import rospy
 from geometry_msgs.msg import PoseStamped
 from sensor_msgs.msg import JointState
 
-BAG_NAME = "bags/bag3"
+BAG_NAME = "bags/bag4"
 df = pd.DataFrame(columns=["x", "y", "theta", "eFL", "eFR", "eRR", "eRL", "timestamp"])
 
 

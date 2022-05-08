@@ -170,14 +170,14 @@ bool RosNodeTask1::readParameters() {
     gearRatio_ = getRequiredRosParam<double, double>(nodeHandle_, "robot/params/gearRatio",
                                                      5.0,
                                                      hasFailed);
-    wheelSubscriberTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "subscriber_topic_wheel",
+    wheelSubscriberTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/subscriber_topic_wheel",
                                                                           "/wheel_states", hasFailed);
 
-    speedPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "publisher_cmd_vel", "/cmd_vel",
+    speedPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/publisher_cmd_vel", "/cmd_vel",
                                                                          hasFailed);
-    wheelsSpeedPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "publisher_wheels_vel", "/wheels_rpm",
+    wheelsSpeedPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/publisher_wheels_vel", "/wheels_rpm",
                                                                          hasFailed);
-    odomPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "publisher_odom", "/odom",
+    odomPublisherTopic_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/publisher_odom", "/odom",
                                                                         hasFailed);
     globalFrameID_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/global_frame_id", "world",
                                                                         hasFailed);
@@ -186,7 +186,7 @@ bool RosNodeTask1::readParameters() {
     odomFrameID_ = getRequiredRosParam<std::string, std::string>(nodeHandle_, "ros/odom_frame_id", "odom",
                                                                         hasFailed);
 
-    startingOdom_ = getRequiredRosParam<std::vector<double>, std::vector<double>>(nodeHandle_, "starting_odom",
+    startingOdom_ = getRequiredRosParam<std::vector<double>, std::vector<double>>(nodeHandle_, "robot/starting_odom",
                                                                                   {0.0006646061665378511,
                                                                                    0.02518487349152565,
                                                                                    0.004701722413301468},
@@ -197,9 +197,11 @@ bool RosNodeTask1::readParameters() {
 void RosNodeTask1::dynamicResetParams(task1::SetConfig &config, u_int32_t level) {
     if (config.Integration_method == 0) {
         odometryCalculator_.setIntegrationMethod(std::make_unique<Euler>(Euler()));
+        ROS_INFO("using Euler integration");
     }
     if (config.Integration_method == 1) {
         odometryCalculator_.setIntegrationMethod(std::make_unique<Rungekutta4>(Rungekutta4()));
+        ROS_INFO("using Runge Kutta integration");
     }
 
     //Wheel filtering
@@ -208,17 +210,19 @@ void RosNodeTask1::dynamicResetParams(task1::SetConfig &config, u_int32_t level)
         wheelFR_.setFilter(std::make_unique<Filter>(Filter()));
         wheelRL_.setFilter(std::make_unique<Filter>(Filter()));
         wheelRR_.setFilter(std::make_unique<Filter>(Filter()));
+        ROS_INFO("no filtering on wheel speed");
     }
     if (config.Wheel_speed_filtering == 1) {
         wheelFL_.setFilter(std::make_unique<LowPassFilter>(LowPassFilter(1.0, 1.0/15.0, 0)));
         wheelFR_.setFilter(std::make_unique<LowPassFilter>(LowPassFilter(1.0, 1.0/15.0, 0)));
         wheelRL_.setFilter(std::make_unique<LowPassFilter>(LowPassFilter(1.0, 1.0/15.0, 0)));
         wheelRR_.setFilter(std::make_unique<LowPassFilter>(LowPassFilter(1.0, 1.0/15.0, 0)));
+        ROS_INFO("low pass filter on wheel speed");
     }
 }
 
 bool RosNodeTask1::serviceCallback(task1::SetPoseService::Request &request, task1::SetPoseService::Response &response) {
-    std::cout << "Pose reset service called" << std::endl;
+    ROS_INFO("pose reset service called");
     // resetting tf odom
     publishTFOdom(request.x, request.y, request.theta);
     // resetting odometry pose

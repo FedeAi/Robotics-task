@@ -25,5 +25,4 @@ double LowPassFilter::update(double input, double timestamp) {
     previousTime_ = timestamp;
     return output;
 
-    return Filter::update(input, timestamp);
 }

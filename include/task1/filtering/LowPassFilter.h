@@ -29,6 +29,12 @@ public:
      */
     double update(double input) override;
 
+    /**
+     *
+     * @param input
+     * @param timestamp
+     * @return filter output
+     */
     double update(double input, double timestamp) override;
 
 private:
